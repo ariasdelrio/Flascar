@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="es.guillesoft.flascar"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <application android:icon="@drawable/logo" android:label="@string/app_name">
+        <activity android:name=".Welcome"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SelectCardfile" />
+        <activity android:name=".ShowCardfile" />
+        <activity android:name=".EditCardfile" />
+        <activity android:name=".ShowCards" />
+        <activity android:name=".EditCard" />
+        <activity android:name=".ShowCard" />
+        <activity android:name=".Review" />
+        <activity android:name=".Result" />
+        <activity android:name=".Learn" />
+        <provider android:authorities="es.guillesoft.flascar.db.FlashcardProvider" android:name="es.guillesoft.flascar.db.FlashcardProvider"/>
+    </application>
+    <uses-sdk android:minSdkVersion="7" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+</manifest> 
