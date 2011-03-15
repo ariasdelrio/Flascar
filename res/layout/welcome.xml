@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:padding="20px"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+	<LinearLayout 
+		android:orientation="horizontal"
+		android:paddingBottom="20px"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+    
+    	<ImageView 
+    		android:src="@drawable/logo"
+    		android:background="@null"
+    		android:layout_width="wrap_content"
+    		android:layout_height="fill_parent"/>
+    
+    	<TextView style="@style/Title" 
+    		android:text="@string/app_name"
+    		android:gravity="left|center_vertical"
+    		android:layout_weight="1"
+    		android:paddingLeft="5px"
+    		android:paddingRight="5px"
+    		android:layout_width="wrap_content"
+    		android:layout_height="fill_parent"/>
+    	
+    	<TextView style="@style/Title" 
+    		android:text="@string/app_version"
+			android:layout_weight="5"
+    		android:gravity="left|center_vertical"
+    		android:layout_width="wrap_content"
+    		android:layout_height="fill_parent"/>
+    	
+	</LinearLayout>
+
+   	<LinearLayout 
+		android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+    	
+    	<TextView android:id="@+id/welcome_txtCardfileName" 
+    		style="@style/Text" 
+    		android:text="@string/welcome_none"
+    		android:layout_weight="1"
+    		android:layout_width="wrap_content"
+    		android:layout_height="fill_parent"/>
+    		
+    	<ImageButton android:id="@+id/welcome_btnChangeCardfile"
+    	 	android:onClick="changeCardfile" 
+    		android:src="@drawable/change"
+    		android:background="@null"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+
+   	</LinearLayout>
+
+   	<LinearLayout 
+		android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+    	
+    	<TextView android:id="@+id/welcome_txtSense" 
+    		style="@style/Text" 
+    		android:text=""
+    		android:layout_weight="1"
+    		android:layout_width="wrap_content"
+    		android:layout_height="fill_parent"/>
+    		
+    	<ImageButton android:id="@+id/welcome_btnChangeSense"
+    	 	android:onClick="changeSense" 
+    		android:src="@drawable/change"
+    		android:background="@null"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+
+   	</LinearLayout>
+   	
+   	<LinearLayout 
+		android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:gravity="bottom"
+    	android:layout_height="60sp">
+    	
+    	<TextView  
+    		style="@style/Text" 
+    		android:text="@string/welcome_import"
+    		android:layout_weight="1"
+    		    	android:gravity="bottom"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+    		
+    	<ImageButton 
+    	 	android:onClick="importCardfile" 
+    		android:src="@drawable/import_"
+    		    	android:gravity="bottom"
+    		android:background="@null"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+
+   	</LinearLayout>
+   	
+   	<LinearLayout 
+		android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+    	
+    	<TextView  
+    		style="@style/Text" 
+    		android:text="@string/welcome_export"
+    		android:layout_weight="1"
+    		android:layout_width="wrap_content"
+    		android:layout_height="fill_parent"/>
+    		
+    	<ImageButton 
+    	 	android:onClick="exportCardfile" 
+    		android:src="@drawable/export"
+    		android:background="@null"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+
+   	</LinearLayout>
+
+   	<LinearLayout 
+		android:orientation="horizontal"
+		android:layout_weight="1"
+		android:gravity="bottom"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content">
+ 
+     	<ImageButton android:src="@drawable/view"
+     		android:background="@null"
+			android:layout_weight="1"
+     		android:onClick="showCardfile" 
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+    		   	
+    	<ImageButton android:src="@drawable/start"
+     		android:background="@null"
+     		android:layout_weight="1"
+     		android:onClick="learn" 
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"/>
+    		
+   	</LinearLayout>
+    
+</LinearLayout>
