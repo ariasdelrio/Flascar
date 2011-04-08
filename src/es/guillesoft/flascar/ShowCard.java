@@ -28,10 +28,10 @@ public class ShowCard extends Activity {
         
         TextView txtSideA = (TextView) findViewById( R.id.show_card_txtSideA_name );
 		TextView txtSideB = (TextView) findViewById( R.id.show_card_txtSideB_name );
-		
+		/* PA Q COMPILE
 		txtSideA.setText( card.getCardfile().getSideA() );
 		txtSideB.setText( card.getCardfile().getSideB() );
-		
+		*/
         reload();
     
 	}

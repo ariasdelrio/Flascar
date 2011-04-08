@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import es.guillesoft.flascar.activity.SelectCardfile;
 import es.guillesoft.flascar.dm.Cardfile;
 
 public class ShowCardfile extends Activity {
@@ -47,11 +48,11 @@ public class ShowCardfile extends Activity {
 			
 		}
 		else {
-			
+			/* PA Q COMPILE
 			txtName.setText( cardfile.getName() );
 			txtSideA.setText( cardfile.getSideA() );
 			txtSideB.setText( cardfile.getSideB() );
-						
+						*/
 		}
 		
 	}
@@ -111,7 +112,7 @@ public class ShowCardfile extends Activity {
             	{
             		
             		Bundle extras = intent.getExtras();
-            		cardfile = extras.getParcelable( SelectCardfile.EXTRA_CARDFILE );
+            		cardfile = extras.getParcelable( /*SelectCardfile.EXTRA_CARDFILE*/"lala" );
             		reload();
             		
             	}

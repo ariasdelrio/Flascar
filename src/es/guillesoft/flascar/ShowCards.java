@@ -37,14 +37,14 @@ public class ShowCards extends ListActivity {
 	public void addCard() {
 		
 		if( cardfile == null ) return;
-		
+		/* PA Q COMPILE
 		Card card = cardfile.addCard( getContentResolver(), "", "");
 		
 		Log.d( "ShowCards", "-> ACTIVITY_EDIT_CARD" );
 		Intent intent = new Intent( this, EditCard.class );
 		intent.putExtra( EditCard.EXTRA_CARD, card );
 		startActivityForResult( intent, ACTIVITY_EDIT_CARD );
-		
+		*/
 	}
 	
 	public void showCard( Card card ) {
@@ -62,7 +62,7 @@ public class ShowCards extends ListActivity {
 	private void reload() {
 
 		if( cardfile == null ) return;
-		
+		/* PA Q COMPILE
 		cursor = cardfile.getCards( getContentResolver() );
         startManagingCursor( cursor );
                 
@@ -73,7 +73,7 @@ public class ShowCards extends ListActivity {
             new SimpleCursorAdapter( this, R.layout.show_cards_row, cursor, from, to );
    	
         setListAdapter( adapter );
-
+*/
     }
 	
 	/* Events */

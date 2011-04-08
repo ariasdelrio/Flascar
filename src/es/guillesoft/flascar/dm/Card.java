@@ -16,14 +16,14 @@ import android.util.Log;
 
 public class Card implements Parcelable {
 
-	public static final String ID = es.guillesoft.flascar.db.Card.ID;
-    public static final String CARDFILE_ID = es.guillesoft.flascar.db.Card.CARDFILE_ID;
-    public static final String BOX_A = es.guillesoft.flascar.db.Card.BOX_A;
-    public static final String BOX_B = es.guillesoft.flascar.db.Card.BOX_B;
-    public static final String SIDE_A = es.guillesoft.flascar.db.Card.SIDE_A;
-    public static final String SIDE_B = es.guillesoft.flascar.db.Card.SIDE_B;
-    public static final String LAST_CHECKED_A = es.guillesoft.flascar.db.Card.LAST_CHECKED_A;
-    public static final String LAST_CHECKED_B = es.guillesoft.flascar.db.Card.LAST_CHECKED_B;
+	public static final String ID = "";
+    public static final String CARDFILE_ID = "";
+    public static final String BOX_A = "";
+    public static final String BOX_B = "";
+    public static final String SIDE_A = "";
+    public static final String SIDE_B = "";
+    public static final String LAST_CHECKED_A = "";
+    public static final String LAST_CHECKED_B = "";
     
     private long id;
 //    private long cardfile_id;
@@ -128,7 +128,7 @@ public class Card implements Parcelable {
 //		else return null;
 //    	
 //    }
-    
+	/* PA Q COMPILE
     protected static Card create( ContentResolver cr, Cardfile cardfile, long box_a, long box_b, String sideA, String sideB, 
     		String lastCheckedA, String lastCheckedB ) {
     	
@@ -142,8 +142,8 @@ public class Card implements Parcelable {
 		values.put( Card.LAST_CHECKED_B, lastCheckedB );
 		values.put( Card.BOX_A, box_a );
 		values.put( Card.BOX_B, box_b );
-		
-		Uri newUri = cr.insert( FlashcardProvider.card.getUri(), values );
+
+		Uri newUri = cr.insert( FlashcardProvider.getUri( FlashcardProvider.CARD_TABLE ), values );
 		
 		List<String> s = newUri.getPathSegments();
 		if( s.get( 0 ).equals( es.guillesoft.flascar.db.Card.URI_ROOT ) ) {
@@ -154,9 +154,10 @@ public class Card implements Parcelable {
 			
 		}
 		else return null;
+		
     	
     }
-    
+*/    
 //    public static Card toCard( Cursor cursor ) {
 //    	
 //    	try {
@@ -236,14 +237,16 @@ public class Card implements Parcelable {
     public boolean delete( ContentResolver cr ) {
 		
 		Log.d( "Card", "delete " + id );
-		
+		/* PA Q COMPILE
 		return cr.delete( 
 				FlashcardProvider.card.getUri(), 
 				ID + " = ?",
 				new String[] { new Long( id ).toString() } ) == 1;
+				*/
+		return false;
 		
 	}
-    
+    /* PA Q COMPILE
     public boolean update( ContentResolver contentResolver, FlashcardProvider.Sense sense ) {
      	 
     	Log.d( "Card", "update " + id + " - " + sense );
@@ -273,7 +276,8 @@ public class Card implements Parcelable {
      		new String[] { new Long( id ).toString() } ) == 1;
 		
 	}
-    
+	*/
+    /* PA Q COMPILE
     public boolean update( ContentResolver contentResolver ) {
     	 
     	Log.d( "Card", "update " + id );
@@ -292,7 +296,8 @@ public class Card implements Parcelable {
      		new String[] { new Long( id ).toString() } ) == 1;
 		
 	}
-
+*/
+    /* PA Q COMPILE
     public boolean climbUp( ContentResolver cr, FlashcardProvider.Sense sense ) {
 		 
     	long box_id = sense == FlashcardProvider.Sense.AB ? box_a : box_b;
@@ -324,7 +329,7 @@ public class Card implements Parcelable {
 		return update( cr, sense );
 				
 	}
-	
+	*/
 	/* Parcelable */
 	
 	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card> () {

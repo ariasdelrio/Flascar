@@ -28,10 +28,10 @@ public class EditCard extends Activity {
         
         TextView txtSideA = (TextView) findViewById( R.id.edit_card_txtSideA_name );
 		TextView txtSideB = (TextView) findViewById( R.id.edit_card_txtSideB_name );
-		
+		/* PA Q COMPILE
 		txtSideA.setText( card.getCardfile().getSideA() );
 		txtSideB.setText( card.getCardfile().getSideB() );
-		
+		*/
         reload();
     
 	}
@@ -62,13 +62,13 @@ public class EditCard extends Activity {
 		
 		card.setSideA( txtSideA.getText().toString() );
 		card.setSideB( txtSideB.getText().toString() );
-		
+		/* PA Q COMPILE
 		card.update( getContentResolver() );
 		
 		Intent intent = new Intent();
 		intent.putExtra( EXTRA_CARD, card ); 
 		setResult( RESULT_OK, intent );
-		
+		*/
         finish();
         		
 		

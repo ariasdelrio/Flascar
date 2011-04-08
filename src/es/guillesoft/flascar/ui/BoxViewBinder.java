@@ -10,7 +10,7 @@ import es.guillesoft.flascar.dm.Cardfile;
 public class BoxViewBinder implements ViewBinder {
 
     public boolean setViewValue( View view, Cursor cursor, int columnIndex ) { 
-    
+		/* PA Q COMPILE
 		int iID = cursor.getColumnIndex( Cardfile.BOX_ID );
 		int iAll = cursor.getColumnIndex( Cardfile.BOX_TOTAL );
 		int iDirty = cursor.getColumnIndex( Cardfile.BOX_DIRTY );
@@ -40,7 +40,8 @@ public class BoxViewBinder implements ViewBinder {
 		}
 		
 		return false;
-		
+		*/
+    	return false;
 	}
   
 }

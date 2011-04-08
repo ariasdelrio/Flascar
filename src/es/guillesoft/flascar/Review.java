@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import es.guillesoft.flascar.db.FlashcardProvider.Sense;
 import es.guillesoft.flascar.dm.Card;
 import es.guillesoft.flascar.dm.Cardfile;
 
@@ -23,8 +22,9 @@ public class Review extends Activity implements OnClickListener {
 	public static final String EXTRA_SENSE_AB = "senseAB";
 	
 	private Cardfile cardfile;
+	/* PA Q COMPILE
 	private Sense sense;
-	
+	*/
 	private Cursor cursor;
 	private boolean hidden;
 		
@@ -38,38 +38,39 @@ public class Review extends Activity implements OnClickListener {
         
         TextView txtSideB = (TextView) findViewById( R.id.review_txtSideB );
         txtSideB.setOnClickListener( this );
-        
+		/* PA Q COMPILE
         Bundle extras = getIntent().getExtras();
         cardfile = extras.getParcelable( EXTRA_CARDFILE );
         sense = extras.getBoolean( EXTRA_SENSE_AB ) ? Sense.AB : Sense.BA; 
         Log.d( "REVIEW", "sense = " + sense );
         long boxID = extras.getLong( EXTRA_BOX_ID );
-        
+     
         cursor = cardfile.getCardsToReview( getContentResolver(), boxID, sense );
         cursor.moveToFirst();
-        
+     */   
 		reload();
 		        
     }
     
     public void markRight( View view ) {
-		
+		/* PA Q COMPILE
 		Card.toCard( cursor, cardfile ).climbUp( getContentResolver(), sense );
 		cursor.moveToNext();
 		hidden = true;
 		right++;
 		reload();
+		*/
 		
     }
     
     public void markWrong( View view ) {
-		
+		/* PA Q COMPILE
 		Card.toCard( cursor, cardfile ).climbDown( getContentResolver(), sense );
 		cursor.moveToNext();
 		hidden = true;
 		wrong++;
 		reload();
-
+*/
     }
 
     public void pass( View view ) {
@@ -82,7 +83,7 @@ public class Review extends Activity implements OnClickListener {
     }
     
     private void reload() {
-        
+		/* PA Q COMPILE
     	String card_a_str = sense == Sense.AB ? Card.SIDE_A: Card.SIDE_B;
     	String card_b_str = sense == Sense.AB ? Card.SIDE_B: Card.SIDE_A;
     	
@@ -133,12 +134,6 @@ public class Review extends Activity implements OnClickListener {
     		btnWrong.setEnabled( true );
     		rwButtons.setVisibility( View.VISIBLE );
     		pButton.setVisibility( View.GONE );
-    		
-    	}
-    	/*
-    	if( cursor.isLast() ) {
-    		
-    		btnPass.setEnabled( false );
     		
     	}
     	*/

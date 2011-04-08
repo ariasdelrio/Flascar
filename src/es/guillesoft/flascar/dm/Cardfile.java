@@ -1,10 +1,9 @@
 package es.guillesoft.flascar.dm;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import es.guillesoft.flascar.db.FlashcardProvider;
+import es.guillesoft.flascar.db.view.CardfileView;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -16,6 +15,117 @@ import android.util.Log;
 
 public class Cardfile implements Parcelable {
   
+	private long id;
+    private String name;
+    private String sideA;
+    private String sideB;
+    private long cardCount;
+	
+	public long getID() {
+		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getSideA() {
+		return sideA;
+	}
+	
+	public String getSideB() {
+		return sideB;
+	}
+	
+	public long getCardCount() {
+		return cardCount;
+	}
+	
+	/* AUX */
+	
+	public static Cardfile get( ContentResolver cr, long id ) {
+		
+		Cursor c = cr.query( 
+			FlashcardProvider.getUri( FlashcardProvider.CARDFILE ), 
+			new String[] { CardfileView.ID, CardfileView.NAME, CardfileView.SIDE_A, CardfileView.SIDE_B, CardfileView.CARDS }, 
+			CardfileView.ID + " = ?", 
+			new String[] { new Long( id ).toString() }, 
+			null );
+			
+		if( c == null || c.moveToFirst() == false ) return null;
+		return Cardfile.toCardfile( c );
+		
+	}
+	
+	public static Cursor getAll( ContentResolver cr ) {
+
+		return cr.query( FlashcardProvider.getUri( FlashcardProvider.CARDFILE ), null,	null, null,	null );
+		
+	}
+	
+	protected static Cardfile toCardfile( Cursor cursor ) throws IllegalArgumentException {
+	
+		try {
+		
+			int index = cursor.getColumnIndexOrThrow( CardfileView.ID );
+			if( cursor.isNull( index ) ) throw new IllegalArgumentException( "Cardfile must have ID" );
+			long id =  cursor.getLong( index ); 
+		
+			index = cursor.getColumnIndexOrThrow( CardfileView.NAME );
+			String name = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
+		
+			index = cursor.getColumnIndexOrThrow( CardfileView.SIDE_A );
+			String sideA = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
+		
+			index = cursor.getColumnIndexOrThrow( CardfileView.SIDE_B );
+			String sideB = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
+		
+			long cardCount = 0;
+			index = cursor.getColumnIndex( CardfileView.CARDS );
+			if( index != -1 && !cursor.isNull( index ) ) cardCount = cursor.getLong( index ); 
+		
+			return new Cardfile( id, name, sideA, sideB, cardCount );
+		
+		}
+		catch( IllegalArgumentException e ) {
+		
+			Log.e( "Cardfile", "Illegal argument" );
+			throw e;
+		
+		}
+	
+	}
+
+	public static Cardfile create( ContentResolver cr, String name, String sideA, String sideB ) {
+    	
+    	Log.d( "Cardfile", "create" );
+		
+		ContentValues values = new ContentValues();
+		values.put( CardfileView.NAME, name );
+		values.put( CardfileView.SIDE_A, sideA );
+		values.put( CardfileView.SIDE_B, sideB );
+
+		Uri newUri = cr.insert( FlashcardProvider.getUri( FlashcardProvider.CARDFILE ), values );
+	
+		List<String> s = newUri.getPathSegments();
+		long id = Long.parseLong( s.get( 1 ) );
+		Log.d( "Cardfile", "created (" + id + ")" );
+		return new Cardfile( id, name, sideA, sideB, 0 );
+		
+    }
+	
+	
+	private Cardfile( long id, String name, String sideA, String sideB, long cardCount ) {
+    	
+    	this.name = name;
+    	this.sideA = sideA;
+    	this.sideB = sideB;
+    	this.id = id;
+    	this.cardCount = cardCount;
+    	
+    }
+	    
+	/* PA Q COMPILE
     public static final String ID = es.guillesoft.flascar.db.Cardfile.ID;
     public static final String NAME = es.guillesoft.flascar.db.Cardfile.NAME;
     public static final String SIDE_A = es.guillesoft.flascar.db.Cardfile.SIDE_A;
@@ -35,17 +145,10 @@ public class Cardfile implements Parcelable {
 	public static final String REVIEW_BOX_B = es.guillesoft.flascar.db.Cardfile.REVIEW_BOX_B;
 	public static final String REVIEW_LAST_CHECKED_A = es.guillesoft.flascar.db.Cardfile.REVIEW_LAST_CHECKED_A;
 	public static final String REVIEW_LAST_CHECKED_B = es.guillesoft.flascar.db.Cardfile.REVIEW_LAST_CHECKED_B;
-	
-    private long id;
-    private String name;
-    private String sideA;
-    private String sideB;
+	*/
     
-    public long getID() {
-    	return id;
-    }
-    
-    public String getName() {
+    /* PA Q COMPILE
+   public String getName() {
     	return name;
     }
     
@@ -56,7 +159,11 @@ public class Cardfile implements Parcelable {
     public String getSideB() {
     	return sideB;
     }
-    
+
+    public long getCardCount() {
+    	return cardCount;
+    }
+
     public void setName( String name ) {
     	this.name = name;
     }
@@ -71,48 +178,19 @@ public class Cardfile implements Parcelable {
     
     private Cardfile( long id, String name, String sideA, String sideB ) {
     	
-    	this.name = name;
-    	this.sideA = sideA;
-    	this.sideB = sideB;
-    	this.id = id;
+//    	this.name = name;
+//    	this.sideA = sideA;
+//    	this.sideB = sideB;
+//    	this.id = id;
+
+    	this( id, name, sideA, sideB, 0 );
     	
     }
     
-    public static Cardfile create( ContentResolver cr, String name, String sideA, String sideB ) {
-    	
-    	Log.d( "Cardfile", "create" );
-		
-		ContentValues values = new ContentValues();
-		values.put( NAME, name );
-		values.put( SIDE_A, sideA );
-		values.put( SIDE_B, sideB );
+    
 
-		Uri newUri = cr.insert( FlashcardProvider.cardfile.getUri(), values );
 	
-		List<String> s = newUri.getPathSegments();
-		if( s.get( 0 ).equals( es.guillesoft.flascar.db.Cardfile.URI_ROOT  ) &&
-		    s.get( 1 ).equals( es.guillesoft.flascar.db.Cardfile.URI_PLAIN ) ) {
-			long id = Long.parseLong( s.get( 2 ) );
-			Log.d( "Cardfile", "created (" + id + ")" );
-			return new Cardfile( id, name, sideA, sideB );
-		}
-		else return null;
-		
-    }
     
-    public static Cardfile get( ContentResolver cr, long id ) {
-		
-		Cursor c = cr.query( 
-				FlashcardProvider.cardfile.getUri(), 
-				new String[] { ID, NAME, SIDE_A, SIDE_B }, 
-				ID + " = ?", 
-				new String[] { new Long( id ).toString() }, 
-				null );
-		
-		if( c == null || c.moveToFirst() == false ) return null;
-		return Cardfile.toCardfile( c );
-
-	}
     
     public static Cardfile getCurrent( ContentResolver cr ) {
 		
@@ -122,45 +200,19 @@ public class Cardfile implements Parcelable {
 
 	}
 
-    public static Cursor getAll( ContentResolver contentResolver ) {
-
-		return contentResolver.query( 
-				FlashcardProvider.cardfile.getCountUri(), 
-				new String[] { ID, NAME, SIDE_A, SIDE_B, COUNT_CARDS }, 
-				null, 
-				null, 
-				null );
-		
-	}
+//    public static Cursor getAll( ContentResolver contentResolver ) {
+//
+//		return contentResolver.query( 
+//				FlashcardProvider.cardfile.getCountUri(), 
+//				new String[] { ID, NAME, SIDE_A, SIDE_B, COUNT_CARDS }, 
+//				null, 
+//				null, 
+//				null );
+//		
+//	}
     
-    public static Cardfile toCardfile( Cursor cursor ) throws IllegalArgumentException {
-    	
-    	try {
-    		
-    		int index = cursor.getColumnIndexOrThrow( ID );
-    		if( cursor.isNull( index ) ) throw new IllegalArgumentException( "Cardfile must have ID" );
-    		long id =  cursor.getLong( index ); 
-    		
-    		index = cursor.getColumnIndexOrThrow( NAME );
-    		String name = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		index = cursor.getColumnIndexOrThrow( SIDE_A );
-    		String sideA = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		index = cursor.getColumnIndexOrThrow( SIDE_B );
-    		String sideB = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		return new Cardfile( id, name, sideA, sideB );
-    		
-    	}
-    	catch( IllegalArgumentException e ) {
-    		
-    		Log.e( "Cardfile", "Illegal argument" );
-    		throw e;
-    		
-    	}
-    	
-    }
+    
+    
     
     public boolean delete( ContentResolver cr ) {
 		
@@ -263,7 +315,10 @@ public class Cardfile implements Parcelable {
     	
     	
 	}
-	
+	*/
+    
+   
+    
 	/* Parcelable */
 	
 	public static final Parcelable.Creator<Cardfile> CREATOR = new Parcelable.Creator<Cardfile> () {

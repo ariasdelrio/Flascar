@@ -4,6 +4,9 @@
     <string name="app_name">Fláscar</string>
     <string name="app_version">(beta)</string>
     <string name="new_cardfile">Nuevo fichero</string>
+
+	<string name="cardfile">Fichero</string>
+
     <string name="name">Nombre:</string>
 	<string name="cf_side_a">Sentido A:</string>
 	<string name="cf_side_b">Sentido B:</string>
@@ -12,7 +15,7 @@
 	<string name="c_last_checked_a">Última revisión A:</string>
 	<string name="c_last_checked_b">Última revisión B:</string>
     
-    <string name="welcome_none">Archivo no seleccionado</string>
+    <string name="welcome_none">Fichero no seleccionado</string>
     <string name="welcome_import">Importar</string>
     <string name="welcome_export">Exportar</string>
         

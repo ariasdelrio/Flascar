@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import es.guillesoft.flascar.db.FlashcardProvider.Sense;
 import es.guillesoft.flascar.dm.Cardfile;
 import es.guillesoft.flascar.ui.BoxViewBinder;
 
@@ -21,23 +20,25 @@ public class Learn extends ListActivity {
 	public static final String EXTRA_SENSE_AB = "senseAB";
 	
 	private Cardfile cardfile;
+	/* PA Q COMPILE
 	private Sense sense;
+	*/
 	private Cursor cursor;
 
 	public void setUp() {
-
+		/* PA Q COMPILE
 		setContentView( R.layout.learn );
 		Bundle extras = getIntent().getExtras();
         cardfile = extras.getParcelable( EXTRA_CARDFILE );
         sense = extras.getBoolean( EXTRA_SENSE_AB )? Sense.AB : Sense.BA; 
 		reload();
-    
+    */
 	}
 	
 	/* Reload view */
 
 	private void reload() {
-
+		/* PA Q COMPILE
 		if( cardfile == null ) return;
 		
 		cursor = cardfile.getBoxesExt( getContentResolver(), sense );
@@ -52,7 +53,7 @@ public class Learn extends ListActivity {
     	adapter.setViewBinder( new BoxViewBinder() );
     	
         setListAdapter(adapter);
-
+*/
     }
 	
 	/* Events */
@@ -60,7 +61,7 @@ public class Learn extends ListActivity {
 	@Override
     protected void onListItemClick( ListView l, View v, int position, long id ) {
         super.onListItemClick(l, v, position, id);
-
+		/* PA Q COMPILE
         Cursor c = cursor;
         c.moveToPosition( position );
         long boxID = cursor.getLong( cursor.getColumnIndexOrThrow( Cardfile.BOX_ID ) );
@@ -72,7 +73,7 @@ public class Learn extends ListActivity {
                 
         Log.d( "Learn", "-> ACTIVITY REVIEW" );
         startActivityForResult( intent, ACTIVITY_REVIEW );
-        
+        */
     }
   
 	@Override

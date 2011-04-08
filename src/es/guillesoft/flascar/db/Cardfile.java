@@ -13,39 +13,14 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.util.Log;
 
-public class Cardfile extends Entity {
-    
-	public static final String URI_ROOT = "cardfile";
-	public static final String URI_PATTERN = URI_ROOT + "/*";
-	public static final String URI_PLAIN = "plain";
-	public static final String URI_COUNT = "count";
-//	public static final String URI_BOX = "box";
-	public static final String URI_BOX_A = "box-a";
-	public static final String URI_BOX_B = "box-b";
+public class Cardfile {
+    /*
+	
 	//public static final String URI_REVIEW = "review";
 	public static final String URI_REVIEW_A = "review-a";
 	public static final String URI_REVIEW_B = "review-b";
-	
-	public static final String URI_TEST = "test";
-	
-	private static final String TABLE = "cardfile";
-    
-	public static final String ID = "_id";
-	public static final String NAME = "name";
-	public static final String SIDE_A = "side_a";
-	public static final String SIDE_B = "side_b";
-    	
-    private static HashMap<String, String> PMAP;
-    static {
-    	PMAP = new HashMap<String, String>();
-    	PMAP.put( ID, ID );
-    	PMAP.put( NAME, NAME );
-    	PMAP.put( SIDE_A, SIDE_A );
-    	PMAP.put( SIDE_B, SIDE_B );
-    }
-  	
-    public static final String COUNT_CARDS = "ncards";
-    
+	public static final String URI_VIEW = "myview";
+	    
     private static HashMap<String, String> COUNT_PMAP = new HashMap<String, String>();
     static {
     	COUNT_PMAP.put( ID, TABLE + "." + ID + " as " + ID );
@@ -128,6 +103,10 @@ public class Cardfile extends Entity {
     	return Uri.parse( "content://" + getAuthority() + "/" + URI_ROOT + "/" + URI_TEST );
     }
     
+    public Uri getViewUri() {
+    	return Uri.parse( "content://" + getAuthority() + "/" + URI_ROOT + "/" + URI_VIEW );
+    }
+    
 	public String getContentType( Uri uri ) {
 		if( uri.getLastPathSegment().equals( URI_COUNT ) ) return getBaseCT() + URI_ROOT + "." + URI_COUNT;
 		else return getBaseCT() + URI_ROOT;
@@ -140,11 +119,14 @@ public class Cardfile extends Entity {
     			NAME + " text not null, " +
     			SIDE_A + " text not null, " +
     			SIDE_B + " text not null);" );
+    	new CardfileView().create( db );
     }
     
     public void upgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
-    	if( oldVersion != FlashcardDBHelper.V_ALFA )
+    	if( oldVersion != FlashcardDBHelper.V_ALFA ) {
     		db.execSQL( "drop table if exists " + TABLE );
+    		db.execSQL( "drop view if exists " + CardfileView.VIEW_NAME );
+    	}
     	else Log.d( "Cardfile", "Upgrade not needed" );
     	create( db );
     }
@@ -221,27 +203,7 @@ public class Cardfile extends Entity {
 					"on (t1." + BOX_ID + " = t2." + BOX_ID + ")" ); 
 			
 			qb.setProjectionMap( BOX_PMAP );
-
-			/*
-			qb.setTables( 
-					"(select " + Box.TABLE + "." + Box.ID + " as " + BOX_ID + ", " +
-					Box.TABLE + "." + Box.NAME + " as " + BOX_NAME + 
-					", count(" + Card.TABLE + "." + Card.ID + ") total from " +
-					Box.TABLE + " left outer join (select * from " + Card.TABLE +
-					" where " + Card.CARDFILE_ID + " = ? ) " + Card.TABLE +
-					" on (" + Box.TABLE + "." + Box.ID + " = " + 
-					Card.TABLE + "." + Card.BOX_ID + " ) group by " + Box.TABLE +  "." + Box.ID + ") t1 " +
-					"join (select " + Box.TABLE + "." + Box.ID + " as " + BOX_ID + ", " +
-					" count(" + Card.TABLE + "." + Card.ID + ") total from " +
-					Box.TABLE + " left outer join (select * from " + Card.TABLE +
-					" where " + Card.CARDFILE_ID + " = ? ) " + Card.TABLE +
-					" on (" + Box.TABLE + "." + Box.ID + " = " + 
-					Card.TABLE + "." + Card.BOX_ID + " and " + Card.TABLE + "." + Card.LAST_CHECKED + " < datetime ('now', " +
-					Box.TABLE + "." + Box.EXPIRATION + ")) group by " + Box.TABLE +  "." + Box.ID + ") t2 " +
-					"on (t1." + BOX_ID + " = t2." + BOX_ID + ")" ); 
 			
-			qb.setProjectionMap( BOX_PMAP );
-			*/
 		}
 		else if( uri.getLastPathSegment().equals( URI_BOX_B ) ) {
 
@@ -264,39 +226,12 @@ public class Cardfile extends Entity {
 			
 			qb.setProjectionMap( BOX_PMAP );
 
-			/*
-			qb.setTables( 
-					"(select " + Box.TABLE + "." + Box.ID + " as " + BOX_ID + ", " +
-					Box.TABLE + "." + Box.NAME + " as " + BOX_NAME + 
-					", count(" + Card.TABLE + "." + Card.ID + ") total from " +
-					Box.TABLE + " left outer join (select * from " + Card.TABLE +
-					" where " + Card.CARDFILE_ID + " = ? ) " + Card.TABLE +
-					" on (" + Box.TABLE + "." + Box.ID + " = " + 
-					Card.TABLE + "." + Card.BOX_ID + " ) group by " + Box.TABLE +  "." + Box.ID + ") t1 " +
-					"join (select " + Box.TABLE + "." + Box.ID + " as " + BOX_ID + ", " +
-					" count(" + Card.TABLE + "." + Card.ID + ") total from " +
-					Box.TABLE + " left outer join (select * from " + Card.TABLE +
-					" where " + Card.CARDFILE_ID + " = ? ) " + Card.TABLE +
-					" on (" + Box.TABLE + "." + Box.ID + " = " + 
-					Card.TABLE + "." + Card.BOX_ID + " and " + Card.TABLE + "." + Card.LAST_CHECKED + " < datetime ('now', " +
-					Box.TABLE + "." + Box.EXPIRATION + ")) group by " + Box.TABLE +  "." + Box.ID + ") t2 " +
-					"on (t1." + BOX_ID + " = t2." + BOX_ID + ")" ); 
-			
-			qb.setProjectionMap( BOX_PMAP );
-			*/
 		}
 		else if( uri.getLastPathSegment().equals( URI_REVIEW_A ) ) {
 
 			qb.setTables( Box.TABLE + ", " + Card.TABLE );
 			
-			/*
-			selection = 
-				Card.TABLE + "." + Card.CARDFILE_ID + " = ? and " + 
-				Card.TABLE + "." + Card.BOX_ID + " = ? and " + 
-				Card.TABLE + "." + Card.BOX_ID + " = " + Box.TABLE + "." + Box.ID + " and " +
-				Card.TABLE + "." + Card.LAST_CHECKED + " < datetime ('now', " +
-				Box.TABLE + "." + Box.EXPIRATION + ")";
-	*/
+			
 			selection = 
 				Card.TABLE + "." + Card.CARDFILE_ID + " = ? and " + 
 				Card.TABLE + "." + Card.BOX_A + " = ? and " + 
@@ -334,6 +269,13 @@ public class Cardfile extends Entity {
 			
 
 		}
+		else if( uri.getLastPathSegment().equals( URI_VIEW ) ) {
+
+			// !!!
+			return new CardfileView().query( db, projection, selection, selectionArgs, sortOrder );
+			
+
+		}
 		else {
 			
 			qb.setTables( TABLE );
@@ -357,5 +299,6 @@ public class Cardfile extends Entity {
 		return db.update( TABLE, values, where, whereArgs);
 		
 	}
+	*/
 	
 }

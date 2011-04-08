@@ -47,17 +47,17 @@ public class EditCardfile extends Activity {
 			
 		}
 		else {
-			
+			/* PA Q COMPILE
 			txtName.setText( cardfile.getName() );
 			txtSideA.setText( cardfile.getSideA() );
 			txtSideB.setText( cardfile.getSideB() );
-						
+						*/
 		}
 		
 	}
 	
 	public void save( View view ) {
-		
+		/* PA Q COMPILE
 		cardfile.setName( txtName.getText().toString() );
 		cardfile.setSideA( txtSideA.getText().toString() );
 		cardfile.setSideB( txtSideB.getText().toString() );
@@ -69,6 +69,7 @@ public class EditCardfile extends Activity {
 		setResult( RESULT_OK, intent );
 		
         finish();
+        */
         		
 		
 	}
