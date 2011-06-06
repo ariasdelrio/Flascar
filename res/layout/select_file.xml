@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="20px">
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<ImageButton
+			android:src="@drawable/root_button"
+			android:background="@null"
+			android:layout_weight="1"
+			android:onClick="moveToRoot"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/sdcard_button"
+			android:background="@null"
+			android:layout_weight="1"
+			android:onClick="moveToSD"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/folder_up_button"
+			android:background="@null"
+			android:layout_weight="1"
+			android:onClick="moveUp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+			
+		<ImageButton
+			android:id="@+id/btnAdd"
+			android:src="@drawable/plus_button"
+			android:background="@null"
+			android:layout_weight="1"
+			android:onClick="add"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		
+	</LinearLayout>
+
+	<ImageView
+		android:src="@android:drawable/divider_horizontal_dark"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		android:paddingLeft="5px"
+		android:paddingRight="5px"
+		android:paddingTop="10px" />
+
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<ListView
+			android:id="@+id/list"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" />
+		<TextView
+			android:id="@+id/empty"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/select_file_none" />
+
+	</LinearLayout>
+
+</LinearLayout>

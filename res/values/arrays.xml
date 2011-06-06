@@ -1,0 +1,12 @@
+<resources>
+
+    <string-array name="card_sort_types">
+        <item>Cara A</item>
+        <item>Cara B</item>
+        <item>Última revisión A</item>
+        <item>Última revisión B</item>
+        <item>Caja A</item>
+        <item>Caja B</item>
+    </string-array>
+    
+</resources>

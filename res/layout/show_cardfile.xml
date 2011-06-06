@@ -1,88 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:padding="20px"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" 
-	android:layout_height="wrap_content">
-	
-	<TableRow>
-	
-		<TextView  
-    		style="@style/Text" 
-    		android:layout_weight=".3"
-    		android:text="@string/name"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-    		
-    	<TextView android:id="@+id/show_cardfile_txtName"
-    		android:layout_weight=".7"
-    		style="@style/Text" 
-    	 	android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-	
-	</TableRow>
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
 
-	<TableRow>
-	
-		<TextView  
-    		style="@style/Text" 
-    		android:layout_weight=".3"
-    		android:text="@string/cf_side_a"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-    		
-    	<TextView android:id="@+id/show_cardfile_txtSideA"
-    		android:layout_weight=".7"
-    		style="@style/Text" 
-    	 	android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-    		
-	</TableRow>
+	<TableLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
 
-	<TableRow>
-	
-		<TextView  
-    		style="@style/Text" 
-    		android:layout_weight=".3"
-    		android:text="@string/cf_side_b"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-    		
-    	<TextView android:id="@+id/show_cardfile_txtSideB"
-    		android:layout_weight=".7"
-    		style="@style/Text"
-    	 	android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
+		<TableRow>
 
-	</TableRow>
-	
-</TableLayout>
+			<TextView
+				style="@style/TextWhite"
+				android:layout_weight=".3"
+				android:text="@string/name"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
 
-<LinearLayout 
+			<TextView
+				style="@style/TextWhite"
+				android:id="@+id/txtName"
+				android:layout_weight=".7"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		</TableRow>
+
+		<TableRow>
+
+			<TextView
+				style="@style/TextWhite"
+				android:layout_weight=".3"
+				android:text="@string/sense_a"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<TextView
+				android:id="@+id/txtSideA"
+				android:layout_weight=".7"
+				style="@style/TextWhite"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		</TableRow>
+
+		<TableRow>
+
+			<TextView
+				style="@style/TextWhite"
+				android:layout_weight=".3"
+				android:text="@string/sense_b"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<TextView
+				android:id="@+id/txtSideB"
+				android:layout_weight=".7"
+				style="@style/TextWhite"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		</TableRow>
+		
+		<TableRow>
+
+			<TextView
+				style="@style/TextWhite"
+				android:layout_weight=".3"
+				android:text="@string/cards"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+			<TextView
+				android:id="@+id/txtCards"
+				android:layout_weight=".7"
+				style="@style/TextWhite"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		</TableRow>
+		
+
+	</TableLayout>
+
+	<LinearLayout
 		android:orientation="horizontal"
 		android:layout_weight="1"
 		android:gravity="bottom"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content">
-	
-		<ImageButton android:src="@drawable/view"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<ImageButton
+			android:src="@drawable/viewcards_button"
 			android:layout_weight="1"
 			android:background="@null"
-		   	android:onClick="showCards"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-    		
-    	<ImageButton android:src="@drawable/edit"
-    		android:layout_weight="1"
+			android:onClick="show"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/edit_button"
+			android:layout_weight="1"
 			android:background="@null"
-    	   	android:onClick="editCardfile"
-    		android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"/>
-    		
-</LinearLayout> 
+			android:onClick="edit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/import_button"
+			android:layout_weight="1"
+			android:background="@null"
+			android:onClick="importDeck"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+			
+		<ImageButton
+			android:src="@drawable/export_button"
+			android:layout_weight="1"
+			android:background="@null"
+			android:onClick="exportDeck"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+			
+	</LinearLayout>
 
 </LinearLayout>

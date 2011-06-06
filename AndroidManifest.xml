@@ -12,11 +12,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SelectCardfile" />
-        <activity android:name=".ShowCardfile" />
-        <activity android:name=".EditCardfile" />
-        <activity android:name=".ShowCards" />
-        <activity android:name=".EditCard" />
-        <activity android:name=".ShowCard" />
+        <activity android:name=".activity.ShowCardfile" />
+        <activity android:name=".activity.EditCardfile" />
+        <activity android:name=".activity.ShowCards" />
+        <activity android:name=".activity.EditCard" />
+        <activity android:name=".activity.ShowCard" />
+        <activity android:name=".activity.SelectFile" />
         <activity android:name=".Review" />
         <activity android:name=".Result" />
         <activity android:name="Learn" />

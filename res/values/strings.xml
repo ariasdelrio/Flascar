@@ -6,14 +6,19 @@
     <string name="new_cardfile">Nuevo fichero</string>
 
 	<string name="cardfile">Fichero</string>
-
-    <string name="name">Nombre:</string>
-	<string name="cf_side_a">Sentido A:</string>
-	<string name="cf_side_b">Sentido B:</string>
-	<string name="c_side_a">Cara A:</string>
-	<string name="c_side_b">Cara B:</string>
-	<string name="c_last_checked_a">Última revisión A:</string>
-	<string name="c_last_checked_b">Última revisión B:</string>
+	<string name="card">Tarjeta</string>
+	<string name="cards">Tarjetas</string>
+	<string name="side">Cara</string>
+	<string name="lastReview">Revisado</string>
+	<string name="box">Caja</string>
+	<string name="sense_a">Sentido A</string>
+	<string name="sense_b">Sentido B</string>
+    <string name="name">Nombre</string>
+	
+	<string name="c_side_a">Cara A</string>
+	<string name="c_side_b">Cara B</string>
+	<string name="c_last_checked_a">Última revisión A</string>
+	<string name="c_last_checked_b">Última revisión B</string>
     
     <string name="welcome_none">Fichero no seleccionado</string>
     <string name="welcome_import">Importar</string>
@@ -24,5 +29,26 @@
 
     <string name="show_cards_none">No hay tarjetas</string>
     <string name="show_cards_add">Nueva</string>
+    
+    <string name="select_file_none">No hay archivos</string>
+    
+    <string name="dlg_positive">Sí</string>
+    <string name="dlg_negative">No</string>
+    
+    <string name="dlg_confirm_delete_card">¿Está seguro de que desea eliminar la tarjeta?</string>
+    <string name="dlg_confirm_cancel_unsaved">Se perderán los cambios no guardados. ¿Continuar?</string>
+    <string name="dlg_confirm_overwrite">Se sobreescribirá el fichero. ¿Continuar?</string>
+    
+    <string name="dlg_prompt_addfile">Guardar como</string>
+    
+    <string name="dlg_sort_title">Ordenar por</string>
+    <string name="dlg_sort_normal">orden normal</string>
+    <string name="dlg_sort_inverse">orden inverso</string>
+    <string name="dlg_sort_positive">ordenar</string>
+    <string name="dlg_sort_negative">cancelar</string>
+    
+    <string name="dlg_search_title">Buscar</string>
+    <string name="dlg_search_positive">buscar</string>
+    <string name="dlg_search_negative">cancelar</string>
         
 </resources>

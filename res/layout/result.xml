@@ -23,7 +23,8 @@
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"/>
     	
-  	<TextView android:id="@+id/result_txtPass" 
+  <!--  <TextView android:id="@+id/result_txtPass" -->
+   <TextView android:id="@+id/order"
 		xmlns:android="http://schemas.android.com/apk/res/android"
     	style="@style/Text" 
     	android:layout_width="wrap_content"

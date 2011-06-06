@@ -13,9 +13,9 @@ public class CardView extends View {
 	
 	/* TABLE card */
 	
-	protected static final String T_CARD       = "card";
-	protected static final String ID           = "_id";
-	protected static final String CARDFILE     = "cardfile";
+	protected static final String T_CARD    = "card";
+	public static final String ID           = "_id";
+	public static final String CARDFILE     = "cardfile";
 	
 	private static final String [] columnsCard = {
 		DBUtil.primaryColumn( ID ),
@@ -42,12 +42,12 @@ public class CardView extends View {
 	/* VIEW v_card */
 	
 	protected static final String V_CARD         = "v_card";
-	protected static final String BOX_A          = "box_a";
-	protected static final String BOX_B          = "box_b";
-	protected static final String SIDE_A         = "side_a";
-	protected static final String SIDE_B         = "side_b";
-	protected static final String LAST_CHECKED_A = "last_checked_a";
-	protected static final String LAST_CHECKED_B = "last_checked_b";
+	public static final String BOX_A          = "box_a";
+	public static final String BOX_B          = "box_b";
+	public static final String SIDE_A         = "side_a";
+	public static final String SIDE_B         = "side_b";
+	public static final String LAST_CHECKED_A = "last_checked_a";
+	public static final String LAST_CHECKED_B = "last_checked_b";
 
 	@Override
 	public void create( SQLiteDatabase db ) {
@@ -212,16 +212,16 @@ public class CardView extends View {
 		senseABValues.put( CARD, cardID );
 		senseABValues.put( SENSE, FlashcardProvider.SENSE_AB );
 		senseABValues.put( BOX, initialValues.getAsLong( BOX_A ) );
-		senseABValues.put( SIDE, initialValues.getAsLong( SIDE_A ) );
-		senseABValues.put( LAST_CHECKED, initialValues.getAsLong( LAST_CHECKED_A ) );
+		senseABValues.put( SIDE, initialValues.getAsString( SIDE_A ) );
+		senseABValues.put( LAST_CHECKED, initialValues.getAsString( LAST_CHECKED_A ) );
 		if( db.insert( T_CARD_SENSE, null, senseABValues ) == -1 ) { db.endTransaction(); return -1; };
 		
 		ContentValues senseBAValues = new ContentValues();
-		senseABValues.put( CARD, cardID );
-		senseABValues.put( SENSE, FlashcardProvider.SENSE_BA );
-		senseABValues.put( BOX, initialValues.getAsLong( BOX_B ) );
-		senseABValues.put( SIDE, initialValues.getAsLong( SIDE_B ) );
-		senseABValues.put( LAST_CHECKED, initialValues.getAsLong( LAST_CHECKED_B ) );
+		senseBAValues.put( CARD, cardID );
+		senseBAValues.put( SENSE, FlashcardProvider.SENSE_BA );
+		senseBAValues.put( BOX, initialValues.getAsLong( BOX_B ) );
+		senseBAValues.put( SIDE, initialValues.getAsString( SIDE_B ) );
+		senseBAValues.put( LAST_CHECKED, initialValues.getAsString( LAST_CHECKED_B ) );
 		if( db.insert( T_CARD_SENSE, null, senseBAValues ) == -1 ) { db.endTransaction(); return -1; };
 		
 		db.setTransactionSuccessful();
@@ -267,8 +267,8 @@ public class CardView extends View {
 		
 		ContentValues senseABValues = new ContentValues();
 		if( values.containsKey( BOX_A ) ) senseABValues.put( BOX, values.getAsLong( BOX_A ) );
-		if( values.containsKey( SIDE_A ) ) senseABValues.put( SIDE, values.getAsLong( SIDE_A ) );
-		if( values.containsKey( LAST_CHECKED_A ) ) senseABValues.put( LAST_CHECKED, values.getAsLong( LAST_CHECKED_A ) );
+		if( values.containsKey( SIDE_A ) ) senseABValues.put( SIDE, values.getAsString( SIDE_A ) );
+		if( values.containsKey( LAST_CHECKED_A ) ) senseABValues.put( LAST_CHECKED, values.getAsString( LAST_CHECKED_A ) );
 		if( senseABValues.size() > 0 ) 
 			if( db.update( T_CARD_SENSE, senseABValues, cardSenseABWhere, whereArgs ) != 1 ) { 
 				db.endTransaction(); 
@@ -277,8 +277,8 @@ public class CardView extends View {
 		
 		ContentValues senseBAValues = new ContentValues();
 		if( values.containsKey( BOX_B ) ) senseABValues.put( BOX, values.getAsLong( BOX_B ) );
-		if( values.containsKey( SIDE_B ) ) senseABValues.put( SIDE, values.getAsLong( SIDE_B ) );
-		if( values.containsKey( LAST_CHECKED_B ) ) senseABValues.put( LAST_CHECKED, values.getAsLong( LAST_CHECKED_B ) );
+		if( values.containsKey( SIDE_B ) ) senseABValues.put( SIDE, values.getAsString( SIDE_B ) );
+		if( values.containsKey( LAST_CHECKED_B ) ) senseABValues.put( LAST_CHECKED, values.getAsString( LAST_CHECKED_B ) );
 		if( senseBAValues.size() > 0 ) 
 			if( db.update( T_CARD_SENSE, senseBAValues, cardSenseBAWhere, whereArgs ) != 1 ) {
 				db.endTransaction();

@@ -6,15 +6,13 @@
     
 	<TextView android:id="@+id/select_cardfile_row_name"
     	xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="20sp"
-    	android:textColor="#FFFFFF"
+    	style="@style/TextSmallWhite"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"/>
 	
 	<TextView android:id="@+id/select_cardfile_row_info"
     	xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="15sp"
-    	android:textColor="#1AF3F0"
+    	style="@style/TextSmallCyan"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"/> 
    

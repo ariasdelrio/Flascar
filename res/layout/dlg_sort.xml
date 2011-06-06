@@ -1,0 +1,50 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_root"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:minWidth="300dp"
+	android:minHeight="400dp"
+	android:padding="20px">
+
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="10px">
+
+		<ImageView
+			android:src="@drawable/sort"
+			android:background="@null"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent" />
+
+		<TextView
+			style="@style/Title"
+			android:text="@string/dlg_sort_title"
+			android:gravity="left|center_vertical"
+			android:layout_weight="1"
+			android:paddingLeft="5px"
+			android:paddingRight="5px"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent" />
+
+	</LinearLayout>
+
+	<Spinner
+		android:id="@+id/type"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:drawSelectorOnTop="true" />
+
+	<ToggleButton
+		android:id="@+id/order"
+		android:textOn="@string/dlg_sort_inverse"
+		android:textOff="@string/dlg_sort_normal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center" />
+	
+</LinearLayout>

@@ -26,7 +26,8 @@ public class Result extends Activity implements OnClickListener {
         TextView txtHeader = (TextView) findViewById(R.id.result_txtHeader);
         TextView txtRight = (TextView) findViewById(R.id.result_txtRight);
         TextView txtWrong = (TextView) findViewById(R.id.result_txtWrong);
-        TextView txtPass = (TextView) findViewById(R.id.result_txtPass);
+//        TextView txtPass = (TextView) findViewById(R.id.result_txtPass);
+        TextView txtPass = (TextView) findViewById(R.id.order);
                 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

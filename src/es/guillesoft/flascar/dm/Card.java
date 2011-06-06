@@ -1,40 +1,30 @@
 package es.guillesoft.flascar.dm;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.Observable;
 
+import es.guillesoft.flascar.db.DBUtil;
 import es.guillesoft.flascar.db.FlashcardProvider;
-
+import es.guillesoft.flascar.db.view.CardView;
 import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
-public class Card implements Parcelable {
+public class Card {
 
-	public static final String ID = "";
-    public static final String CARDFILE_ID = "";
-    public static final String BOX_A = "";
-    public static final String BOX_B = "";
-    public static final String SIDE_A = "";
-    public static final String SIDE_B = "";
-    public static final String LAST_CHECKED_A = "";
-    public static final String LAST_CHECKED_B = "";
-    
+    private CardCollection parent;
+    private Cardfile cardfile;
+
     private long id;
-//    private long cardfile_id;
     private long box_a;
     private long box_b;
     private String sideA;
     private String sideB;
     private String lastCheckedA;    
     private String lastCheckedB;   
-    private Cardfile cardfile;
         
+    public Cardfile getCardfile() {
+    	return cardfile;
+    }
+    
     public long getID() {
     	return id;
     }
@@ -71,181 +61,23 @@ public class Card implements Parcelable {
     	return box_b;
     }
     
-    public Cardfile getCardfile() {
-    	return cardfile;
-    }
-    
-//    private Card( long id, long cardfile_id, long box_a, long box_b, String sideA, String sideB, String lastCheckedA, String lastCheckedB ) {
-//    	
-//    	this.id = id;
-//    	this.cardfile_id = cardfile_id;
-//    	this.box_a = box_a;
-//    	this.box_b = box_b;
-//    	this.sideA = sideA;
-//    	this.sideB = sideB;
-//    	this.lastCheckedA = lastCheckedA;
-//    	this.lastCheckedB = lastCheckedB;
-//    	
-//    }
+    /* protected */
 
-    private Card( long id, Cardfile cardfile, long box_a, long box_b, String sideA, String sideB, String lastCheckedA, String lastCheckedB ) {
+    protected Card( CardCollection parent, Cardfile cardfile, long id, long box_a, long box_b, String sideA, String sideB, String lastCheckedA, String lastCheckedB ) {
     	
-    	this.id = id;
+    	this.parent = parent;
     	this.cardfile = cardfile;
+    	this.id = id;
     	this.box_a = box_a;
     	this.box_b = box_b;
     	this.sideA = sideA;
     	this.sideB = sideB;
     	this.lastCheckedA = lastCheckedA;
     	this.lastCheckedB = lastCheckedB;
-    	
-    }
-
-//    protected static Card create( ContentResolver cr, long cardfile_id, long box_a, long box_b, String sideA, String sideB, 
-//    		String lastCheckedA, String lastCheckedB ) {
-//    	
-//    	Log.d( "Card", "create" );
-//		
-//		ContentValues values = new ContentValues();
-//		values.put( Card.CARDFILE_ID, cardfile_id );
-//		values.put( Card.SIDE_A, sideA );
-//		values.put( Card.SIDE_B, sideB );
-//		values.put( Card.LAST_CHECKED_A, lastCheckedA );
-//		values.put( Card.LAST_CHECKED_B, lastCheckedB );
-//		values.put( Card.BOX_A, box_a );
-//		values.put( Card.BOX_B, box_b );
-//		
-//		Uri newUri = cr.insert( FlashcardProvider.card.getUri(), values );
-//		
-//		List<String> s = newUri.getPathSegments();
-//		if( s.get( 0 ).equals( es.guillesoft.flascar.db.Card.URI_ROOT ) ) {
-//			
-//			long id = Long.parseLong( s.get( 1 ) );
-//			Log.d( "Card", "created (" + id + ")" );
-//			return new Card( id, cardfile_id, box_a, box_b, sideA, sideB, lastCheckedA, lastCheckedB );
-//			
-//		}
-//		else return null;
-//    	
-//    }
-	/* PA Q COMPILE
-    protected static Card create( ContentResolver cr, Cardfile cardfile, long box_a, long box_b, String sideA, String sideB, 
-    		String lastCheckedA, String lastCheckedB ) {
-    	
-    	Log.d( "Card", "create" );
-		
-		ContentValues values = new ContentValues();
-		values.put( Card.CARDFILE_ID, cardfile.getID() );
-		values.put( Card.SIDE_A, sideA );
-		values.put( Card.SIDE_B, sideB );
-		values.put( Card.LAST_CHECKED_A, lastCheckedA );
-		values.put( Card.LAST_CHECKED_B, lastCheckedB );
-		values.put( Card.BOX_A, box_a );
-		values.put( Card.BOX_B, box_b );
-
-		Uri newUri = cr.insert( FlashcardProvider.getUri( FlashcardProvider.CARD_TABLE ), values );
-		
-		List<String> s = newUri.getPathSegments();
-		if( s.get( 0 ).equals( es.guillesoft.flascar.db.Card.URI_ROOT ) ) {
-			
-			long id = Long.parseLong( s.get( 1 ) );
-			Log.d( "Card", "created (" + id + ")" );
-			return new Card( id, cardfile, box_a, box_b, sideA, sideB, lastCheckedA, lastCheckedB );
-			
-		}
-		else return null;
-		
-    	
-    }
-*/    
-//    public static Card toCard( Cursor cursor ) {
-//    	
-//    	try {
-//    		
-//    		int index = cursor.getColumnIndexOrThrow( ID );
-//    		if( cursor.isNull( index ) ) throw new IllegalArgumentException( "Card must have ID" );
-//    		long id =  cursor.getLong( index ); 
-//
-//    		index = cursor.getColumnIndex( BOX_A );
-//    		long box_a = index == -1 || cursor.isNull( index ) ? -1 : cursor.getLong( index ); 
-//    		
-//    		index = cursor.getColumnIndex( BOX_B );
-//    		long box_b = index == -1 || cursor.isNull( index ) ? -1 : cursor.getLong( index ); 
-//    		
-//    		index = cursor.getColumnIndexOrThrow( SIDE_A );
-//    		String sideA = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-//    		
-//    		index = cursor.getColumnIndexOrThrow( SIDE_B );
-//    		String sideB = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-//    		
-//    		index = cursor.getColumnIndex( LAST_CHECKED_A );
-//    		String lastCheckedA = index == -1 || cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-//    		
-//    		index = cursor.getColumnIndex( LAST_CHECKED_B );
-//    		String lastCheckedB = index == -1 || cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-//    		
-//    		return new Card( id, -1, box_a, box_b, sideA, sideB, lastCheckedA, lastCheckedB );
-//    		
-//    	}
-//    	catch( IllegalArgumentException e ) {
-//    		
-//    		Log.e( "Card", "Illegal argument" );
-//    		throw e;
-//    		
-//    	}
-//
-//    }
-    
-    public static Card toCard( Cursor cursor, Cardfile cardfile ) {
-    	
-    	try {
-    		
-    		int index = cursor.getColumnIndexOrThrow( ID );
-    		if( cursor.isNull( index ) ) throw new IllegalArgumentException( "Card must have ID" );
-    		long id =  cursor.getLong( index ); 
-
-    		index = cursor.getColumnIndex( BOX_A );
-    		long box_a = index == -1 || cursor.isNull( index ) ? -1 : cursor.getLong( index ); 
-    		
-    		index = cursor.getColumnIndex( BOX_B );
-    		long box_b = index == -1 || cursor.isNull( index ) ? -1 : cursor.getLong( index ); 
-    		
-    		index = cursor.getColumnIndexOrThrow( SIDE_A );
-    		String sideA = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		index = cursor.getColumnIndexOrThrow( SIDE_B );
-    		String sideB = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		index = cursor.getColumnIndex( LAST_CHECKED_A );
-    		String lastCheckedA = index == -1 || cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		index = cursor.getColumnIndex( LAST_CHECKED_B );
-    		String lastCheckedB = index == -1 || cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-    		
-    		return new Card( id, cardfile, box_a, box_b, sideA, sideB, lastCheckedA, lastCheckedB );
-    		
-    	}
-    	catch( IllegalArgumentException e ) {
-    		
-    		Log.e( "Card", "Illegal argument" );
-    		throw e;
-    		
-    	}
 
     }
-   
-    public boolean delete( ContentResolver cr ) {
-		
-		Log.d( "Card", "delete " + id );
-		/* PA Q COMPILE
-		return cr.delete( 
-				FlashcardProvider.card.getUri(), 
-				ID + " = ?",
-				new String[] { new Long( id ).toString() } ) == 1;
-				*/
-		return false;
-		
-	}
+
+
     /* PA Q COMPILE
     public boolean update( ContentResolver contentResolver, FlashcardProvider.Sense sense ) {
      	 
@@ -277,26 +109,7 @@ public class Card implements Parcelable {
 		
 	}
 	*/
-    /* PA Q COMPILE
-    public boolean update( ContentResolver contentResolver ) {
-    	 
-    	Log.d( "Card", "update " + id );
-    	
-		ContentValues values = new ContentValues();
-		values.put( SIDE_A, sideA );
-		values.put( SIDE_B, sideB );
-		
-		Log.w( "Card", "SIDE A         = " + sideA );
-		Log.w( "Card", "SIDE B         = " + sideB );
-		
-		return contentResolver.update( 
-     		FlashcardProvider.card.getUri(), 
-     		values, 
-     		ID + " = ?",
-     		new String[] { new Long( id ).toString() } ) == 1;
-		
-	}
-*/
+
     /* PA Q COMPILE
     public boolean climbUp( ContentResolver cr, FlashcardProvider.Sense sense ) {
 		 
@@ -332,69 +145,43 @@ public class Card implements Parcelable {
 	*/
 	/* Parcelable */
 	
-	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card> () {
-	    public Card createFromParcel( Parcel source ) {
-	          return new Card( source );
-	    }
-	    public Card[] newArray( int size ) {
-	          return new Card[size];
-	    }
-	};
+//	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card> () {
+//	    public Card createFromParcel( Parcel source ) {
+//	          return new Card( source );
+//	    }
+//	    public Card[] newArray( int size ) {
+//	          return new Card[size];
+//	    }
+//	};
+//	
+//	public int describeContents() {
+//		return hashCode();
+//	}
 	
-	public int describeContents() {
-		return hashCode();
-	}
-
 //	public void writeToParcel( Parcel parcel, int flags ) {
 //
 //		parcel.writeLong( id );
-//		parcel.writeLong( cardfile_id );
 //		parcel.writeLong( box_a );
 //		parcel.writeLong( box_b );
 //		parcel.writeString( sideA );
 //		parcel.writeString( sideB );
 //		parcel.writeString( lastCheckedA );
 //		parcel.writeString( lastCheckedB );
+//		parcel.writeParcelable( cardfile, 0 );
 //
 //	}
 //	
 //	public Card( Parcel parcel ) {
 //		
 //		id = parcel.readLong();
-//		cardfile_id = parcel.readLong();
 //		box_a = parcel.readLong();
 //		box_b = parcel.readLong();
 //		sideA = parcel.readString();
 //		sideB = parcel.readString();
 //		lastCheckedA = parcel.readString();
 //		lastCheckedB = parcel.readString();
+//		cardfile = parcel.readParcelable( Cardfile.class.getClassLoader() );
 //		
 //	}
-	
-	public void writeToParcel( Parcel parcel, int flags ) {
-
-		parcel.writeLong( id );
-		parcel.writeLong( box_a );
-		parcel.writeLong( box_b );
-		parcel.writeString( sideA );
-		parcel.writeString( sideB );
-		parcel.writeString( lastCheckedA );
-		parcel.writeString( lastCheckedB );
-		parcel.writeParcelable( cardfile, 0 );
-
-	}
-	
-	public Card( Parcel parcel ) {
-		
-		id = parcel.readLong();
-		box_a = parcel.readLong();
-		box_b = parcel.readLong();
-		sideA = parcel.readString();
-		sideB = parcel.readString();
-		lastCheckedA = parcel.readString();
-		lastCheckedB = parcel.readString();
-		cardfile = parcel.readParcelable( Cardfile.class.getClassLoader() );
-		
-	}
 	
 }
