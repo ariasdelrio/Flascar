@@ -30,6 +30,28 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			style="@style/TextWhite"
+			android:text="@string/language_a"
+			android:layout_gravity="left"
+			android:layout_weight="1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<Spinner
+			android:id="@+id/spnLanguageA"
+			android:layout_gravity="right"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:drawSelectorOnTop="true" />
+
+	</LinearLayout>
+
 	<TextView
 		style="@style/TextWhite"
 		android:text="@string/sense_b"
@@ -42,6 +64,27 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			style="@style/TextWhite"
+			android:layout_gravity="left"
+			android:layout_weight="1"
+			android:text="@string/language_b"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<Spinner
+			android:id="@+id/spnLanguageB"
+			android:layout_gravity="right"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:drawSelectorOnTop="true" />
+
+	</LinearLayout>
 
 	<LinearLayout
 		android:orientation="horizontal"

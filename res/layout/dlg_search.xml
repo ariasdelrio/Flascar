@@ -33,6 +33,12 @@
 
 	</LinearLayout>
 
+	<Spinner
+		android:id="@+id/field"
+		android:drawSelectorOnTop="true"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+
 	<EditText
 		android:id="@+id/prompt"
 		android:layout_width="fill_parent"

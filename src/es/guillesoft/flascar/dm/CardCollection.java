@@ -9,6 +9,7 @@ import java.util.List;
 import es.guillesoft.flascar.db.DBUtil;
 import es.guillesoft.flascar.db.FlashcardProvider;
 import es.guillesoft.flascar.db.view.CardView;
+import es.guillesoft.flascar.dm.Cardfile.Sense;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -28,6 +29,10 @@ class CardCollection {
 		this.cardfile = cardfile;
 		cards = null;
 
+	}
+	
+	ContentResolver getContentResolver() {
+		return cr;
 	}
 	
 	HashMap<Long, Card> getCards() throws Exception {
@@ -104,6 +109,45 @@ class CardCollection {
 		
 		card.setSideA( sideA );
 		card.setSideB( sideB );
+		
+		return true;
+				
+	}
+	
+	boolean updateCard( Card card, long boxID, Sense sense ) {
+		
+		long id = card.getID();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		String now = dateFormat.format( new Date() );
+		
+		Log.d( this.getClass().getSimpleName(), "updateCard " + id );
+	    	
+		ContentValues values = new ContentValues();
+		values.put( sense == Sense.AB ? CardView.BOX_A : CardView.BOX_B, boxID );
+		values.put( sense == Sense.AB ? CardView.LAST_CHECKED_A : CardView.LAST_CHECKED_B, now );
+		
+		int ret = cr.update( 
+	     		FlashcardProvider.getUri( FlashcardProvider.CARD ), 
+	     		values, 
+	     		null,
+	     		new String[] { new Long( id ).toString() } 
+	    );
+		
+		if( ret != 1 ) return false;
+		
+		if( sense == Sense.AB ) {
+			
+			card.setBoxA( boxID );
+			card.setLastCheckedA( now );
+			
+		}
+		else {
+			
+			card.setBoxB( boxID );
+			card.setLastCheckedB( now );
+			
+		}
 		
 		return true;
 				

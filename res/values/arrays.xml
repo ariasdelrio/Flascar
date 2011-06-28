@@ -1,12 +1,10 @@
 <resources>
 
-    <string-array name="card_sort_types">
-        <item>Cara A</item>
-        <item>Cara B</item>
-        <item>Última revisión A</item>
-        <item>Última revisión B</item>
-        <item>Caja A</item>
-        <item>Caja B</item>
+    <string-array name="languages">
+        <item>Español</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>한국어</item>
     </string-array>
     
 </resources>

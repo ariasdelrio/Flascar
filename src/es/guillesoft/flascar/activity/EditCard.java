@@ -26,7 +26,7 @@ public class EditCard extends FlascarActivity implements ConfirmDialogListener {
 	private TextView txtSideBTitle;
 	private EditText edtSideA;
 	private EditText edtSideB;
-
+	
 	private int dlgConfirm;
 	
 	public EditCard() {
@@ -151,5 +151,4 @@ public class EditCard extends FlascarActivity implements ConfirmDialogListener {
 		
 	}
 	
-		
 }

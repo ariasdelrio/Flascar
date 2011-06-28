@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import es.guillesoft.flascar.Core;
 import es.guillesoft.flascar.R;
 import es.guillesoft.flascar.dm.Cardfile;
-import es.guillesoft.flascar.dm.Cardfile.Sense;
 import es.guillesoft.flascar.dm.Main;
 
 public class Welcome extends FlascarActivity {
@@ -20,10 +17,7 @@ public class Welcome extends FlascarActivity {
 	private Main dm;
 	
 	private TextView txtName;
-	private TextView txtSense;
-	private ImageButton btnSense;
-	
-	private Sense sense;
+	private TextView txtInfo;
 	
 	public Welcome() {
 	
@@ -38,13 +32,12 @@ public class Welcome extends FlascarActivity {
 		        
 		registerActivity( SelectCardfile.class );
 		registerActivity( ShowCardfile.class );
+		registerActivity( Learn.class );
+		
 		dm = Core.getInstance().getDataModel( getContentResolver() );
 		
-		sense = Sense.AB;
-		
 		txtName = (TextView) findViewById( R.id.txtName );
-		txtSense = (TextView) findViewById( R.id.txtSense );
-		btnSense = (ImageButton) findViewById( R.id.btnSense );
+		txtInfo = (TextView) findViewById( R.id.txtInfo );
 		
 	}
 	
@@ -61,20 +54,15 @@ public class Welcome extends FlascarActivity {
 		if( currentCardfile == null ) {
 			
 			txtName.setText( R.string.welcome_none );
-			txtSense.setText( "" );
-			btnSense.setVisibility( View.INVISIBLE );
+			txtInfo.setText( "" );
 			
 		}
 		else {
 		
 			txtName.setText( currentCardfile.getName() );
-			if( sense == Sense.AB ) txtSense.setText( currentCardfile.getSideA() + " > " + currentCardfile.getSideB() );
-			else txtSense.setText( currentCardfile.getSideB() + " > " + currentCardfile.getSideA() );
-			btnSense.setVisibility( View.VISIBLE );
+			txtInfo.setText( currentCardfile.getCardCount() + " " + getString( R.string.cards ) );
 			
 		}
-		
-		
 				
 	}
 	
@@ -96,19 +84,11 @@ public class Welcome extends FlascarActivity {
 		
 	}
 	
-	public void changeSense( View view ) {
-		
-		Log.d( getClass().getSimpleName(), "changeSense" );
-		
-		sense = sense == Sense.AB ? Sense.BA : Sense.AB;
-		refresh();
-		
-	}
-
 	public void show( View view ) {
 		
 		Cardfile cardfile = dm.getCurrentCardfile();
 		
+		// TODO: toast
 		if( cardfile == null ) return; // button shouldn't be enabled
 		
 		Bundle extras = new Bundle();
@@ -119,18 +99,15 @@ public class Welcome extends FlascarActivity {
 
 	public void learn( View view ) {
 		
+		Cardfile cardfile = dm.getCurrentCardfile();
+		
 		Log.d( getClass().getSimpleName(), "learn" );
 		
-		Toast.makeText( getApplicationContext(), "sin implementar", Toast.LENGTH_SHORT ).show();
+		// TODO: toast
+		if( cardfile == null ) return; // button shouldn't be enabled
 		
-//		if( cardfile == null ) return; // button shouldn't be enabled
-		/* PA Q COMPILE
-		Log.d( "Welcome", "-> ACTIVITY_LEARN" );
-		Intent intent = new Intent( this, Learn.class );
-		intent.putExtra( Learn.EXTRA_CARDFILE, cardfile );
-		intent.putExtra( Learn.EXTRA_SENSE_AB, sense == Sense.AB );
-		startActivityForResult( intent, ACTIVITY_LEARN );
-		*/
+		startActivity( Learn.class );
+		
 	}
 		
 }

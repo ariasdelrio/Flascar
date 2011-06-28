@@ -30,10 +30,11 @@ class CardfileCollection {
     		
     }
 	
-	Cardfile addCardfile( String name, String sideA, String sideB ) throws Exception {
+	Cardfile addCardfile( String name, String sideA, String sideB,
+			String languageA, String languageB ) throws Exception {
 		
 		if( cardfiles == null ) readCardfiles();
-		Cardfile cardfile = createCardfile( name, sideA, sideB );
+		Cardfile cardfile = createCardfile( name, sideA, sideB, languageA, languageB );
 		cardfiles.put( cardfile.getID(), cardfile );
 		return cardfile;
 		
@@ -63,7 +64,8 @@ class CardfileCollection {
     	
     }
 
-    private Cardfile createCardfile( String name, String sideA, String sideB ) throws Exception {
+    private Cardfile createCardfile( String name, 
+    		String sideA, String sideB, String languageA, String languageB ) throws Exception {
     	
     	Log.d( this.getClass().getSimpleName(), "createCardfile" );
 		
@@ -71,6 +73,8 @@ class CardfileCollection {
 		values.put( CardfileView.NAME, name );
 		values.put( CardfileView.SIDE_A, sideA );
 		values.put( CardfileView.SIDE_B, sideB );
+		values.put( CardfileView.LANGUAGE_A, languageA );
+		values.put( CardfileView.LANGUAGE_B, languageB );
 
 		Uri newUri = cr.insert( FlashcardProvider.getUri( FlashcardProvider.CARDFILE ), values );
 	
@@ -78,7 +82,7 @@ class CardfileCollection {
 		long id = Long.parseLong( s.get( 1 ) );
 		Log.d( this.getClass().getSimpleName(), "cardfile created (" + id + ")" );
 		
-		Cardfile cardfile = new Cardfile( this, id, name, sideA, sideB, 0 );
+		Cardfile cardfile = new Cardfile( this, id, name, sideA, sideB, languageA, languageB, 0 );
 		
 		return cardfile;
 		
@@ -98,12 +102,18 @@ class CardfileCollection {
 		
 		index = cursor.getColumnIndexOrThrow( CardfileView.SIDE_B );
 		String sideB = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
-			
+		
+		index = cursor.getColumnIndexOrThrow( CardfileView.LANGUAGE_A );
+		String languageA = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
+		
+		index = cursor.getColumnIndexOrThrow( CardfileView.LANGUAGE_B );
+		String languageB = cursor.isNull( index ) ? "ND" : cursor.getString( index ); 
+		
 		long cardCount = 0;
 		index = cursor.getColumnIndex( CardfileView.CARDS );
 		if( index != -1 && !cursor.isNull( index ) ) cardCount = cursor.getLong( index ); 
 		
-		return new Cardfile( this, id, name, sideA, sideB, cardCount );
+		return new Cardfile( this, id, name, sideA, sideB, languageA, languageB, cardCount );
 			
 	}
 	

@@ -12,15 +12,15 @@ public class BoxView extends View {
 	
 	/* TABLE box */
 	
-	protected static final String T_BOX      = "box";
-	protected static final String ID         = "_id";
-	protected static final String NAME       = "name";
-	protected static final String EXPIRATION = "expiration";
+	protected static final String T_BOX   = "box";
+	public static final String ID         = "_id";
+	public static final String NAME       = "name";
+	public static final String EXPIRATION = "expiration"; // minutes
 	
 	private static final String [] columnsBox = {
 		DBUtil.primaryColumn( ID ),
 		DBUtil.textColumn( NAME ),
-		DBUtil.textColumn( EXPIRATION )
+		DBUtil.numberColumn( EXPIRATION )
 	};
 		
 	@Override
@@ -34,31 +34,31 @@ public class BoxView extends View {
 		ContentValues initialValues = new ContentValues();
     	initialValues.put( ID,  1 );
     	initialValues.put( NAME,  "a diario" );
-    	initialValues.put( EXPIRATION,  "-1 days" );
+    	initialValues.put( EXPIRATION,  1440 ); // 1 day
     	db.insert( T_BOX, null, initialValues );
     	
     	initialValues = new ContentValues();
     	initialValues.put( ID,  2 );
     	initialValues.put( NAME,  "cada tres días" );
-    	initialValues.put( EXPIRATION,  "-3 days" );
+    	initialValues.put( EXPIRATION,  4320 ); // 3 days
     	db.insert( T_BOX, null, initialValues );
     	
     	initialValues = new ContentValues();
     	initialValues.put( ID,  3 );
     	initialValues.put( NAME,  "semanal" );
-    	initialValues.put( EXPIRATION,  "-7 days" );
+    	initialValues.put( EXPIRATION,  10080 ); // 7 days
     	db.insert( T_BOX, null, initialValues );
     	
     	initialValues = new ContentValues();
     	initialValues.put( ID,  4 );
     	initialValues.put( NAME,  "mensual" );
-    	initialValues.put( EXPIRATION,  "-1 months" );
+    	initialValues.put( EXPIRATION,  43200 ); // 30 days
     	db.insert( T_BOX, null, initialValues );
     	
     	initialValues = new ContentValues();
     	initialValues.put( ID,  5 );
     	initialValues.put( NAME,  "cada tres meses" );
-    	initialValues.put( EXPIRATION,  "-3 months" );
+    	initialValues.put( EXPIRATION,  129600 ); // 90 days
     	db.insert( T_BOX, null, initialValues );
 		
 	}
@@ -67,14 +67,6 @@ public class BoxView extends View {
 	public void upgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
 		Log.d( this.getClass().getSimpleName(), "upgrade " + oldVersion + " -> " + newVersion );
 		
-//		if( oldVersion <= FlashcardProvider.V_1 ) {
-			
-			db.execSQL( DBUtil.dropTable( T_BOX ) );
-			create( db );
-			
-//		}
-
-
 	}
 	
 	@Override

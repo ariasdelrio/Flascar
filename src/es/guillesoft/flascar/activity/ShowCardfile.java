@@ -77,8 +77,8 @@ public class ShowCardfile extends FlascarActivity {
 		else {
 
 			txtName.setText( cardfile.getName() );
-			txtSideA.setText( cardfile.getSideA() );
-			txtSideB.setText( cardfile.getSideB() );
+			txtSideA.setText( cardfile.getSideA() + " (" + cardfile.getLanguageA() + ")" );
+			txtSideB.setText( cardfile.getSideB() + " (" + cardfile.getLanguageB() + ")" );
 			txtCards.setText( Long.toString( cardfile.getCardCount() ) );
 			
 		}

@@ -23,6 +23,7 @@ import es.guillesoft.flascar.dm.Card;
 import es.guillesoft.flascar.dm.Main;
 import es.guillesoft.flascar.dm.op.CardComparator;
 import es.guillesoft.flascar.dm.op.CardFilter;
+import es.guillesoft.flascar.dm.op.CardFilter.Field;
 import es.guillesoft.flascar.dm.op.CollectionFilter;
 import es.guillesoft.flascar.dm.op.CardComparator.SortOrder;
 import es.guillesoft.flascar.dm.op.CardComparator.SortType;
@@ -46,6 +47,8 @@ public class ShowCards extends FlascarActivity implements OnItemClickListener, S
 	private int sortDialogID;
 	private int searchDialogID;
 	private ArrayList<String> sortTypes;
+	private ArrayList<String> searchFields;
+	
 	private final SortType STYPES[] = { 
 			SortType.SIDE_A,
 			SortType.SIDE_B,
@@ -59,6 +62,7 @@ public class ShowCards extends FlascarActivity implements OnItemClickListener, S
 		
 		super( "ShowCards", R.layout.show_cards );
 		sortDialogID = -1;
+		searchDialogID = -1;
 		
 	}
 	
@@ -93,9 +97,12 @@ public class ShowCards extends FlascarActivity implements OnItemClickListener, S
 		sortTypes.add( getString( R.string.box ) + " " + cardfile.getSideA() );
 		sortTypes.add( getString( R.string.box ) + " " + cardfile.getSideB() );
 		
-		sortDialogID = registerDialog( new SortDialog( sortTypes, this ) );
+		searchFields = new ArrayList<String>();
+		searchFields.add( getString( R.string.side ) + " " + cardfile.getSideA() );
+		searchFields.add( getString( R.string.side ) + " " + cardfile.getSideB() );
 		
-		searchDialogID = registerDialog( new SearchDialog( this ) );
+		sortDialogID = registerDialog( new SortDialog( sortTypes, this ) );
+		searchDialogID = registerDialog( new SearchDialog( searchFields, this ) );
     
 	}
 
@@ -194,9 +201,13 @@ public class ShowCards extends FlascarActivity implements OnItemClickListener, S
 	}
 	
 	@Override
-	public void dlgSearch( String prompt ) {
+	public void dlgSearch( int searchField, String prompt ) {
 
-		cards = CollectionFilter.filter( cards, new CardFilter( prompt ) );
+		Field field = Field.SIDE_A;
+		
+		if( searchField == 1 ) field = Field.SIDE_B;
+		
+		cards = CollectionFilter.filter( cards, new CardFilter( field, prompt ) );
 		refresh();
 		
 	}

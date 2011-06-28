@@ -2,10 +2,12 @@ package es.guillesoft.flascar.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.guillesoft.flascar.Core;
 import es.guillesoft.flascar.R;
@@ -86,8 +88,8 @@ public class ShowCard extends FlascarActivity implements ConfirmDialogListener {
 		}
 		else {
 			
-			txtSideATitle.setText( card.getCardfile().getSideA() );
-			txtSideBTitle.setText( card.getCardfile().getSideB() );
+			txtSideATitle.setText( card.getCardfile().getSideA() + " (" + card.getCardfile().getLanguageA() + ")" );
+			txtSideBTitle.setText( card.getCardfile().getSideB() + " (" + card.getCardfile().getLanguageB() + ")" );
 			txtSideA.setText( card.getSideA() );
 			txtSideB.setText( card.getSideB() );
 			txtLastCheckedA.setText( getString( R.string.lastReview ) + ": " + card.getLastCheckedA() );
@@ -154,7 +156,35 @@ public class ShowCard extends FlascarActivity implements ConfirmDialogListener {
 		showDialog( dlgConfirm );
 		
 	}
+	
+	public void openWikiA( View view ) {
+		Log.d( getClass().getSimpleName(), "openWikiA" );
+		
+		openWiki( card.getCardfile().getLanguageA(), card.getSideA() );
+		
+	}
+	
+	public void openWikiB( View view ) {
+		Log.d( getClass().getSimpleName(), "openWikiB" );
+		
+		openWiki( card.getCardfile().getLanguageB(), card.getSideB() );		
+		
+	}
 
+	public void openDictionaryA( View view ) {
+		Log.d( getClass().getSimpleName(), "openDictionaryA" );
+		
+		openDictionary( card.getCardfile().getLanguageA(), card.getSideA() );
+		
+	}
+
+	public void openDictionaryB( View view ) {
+		Log.d( getClass().getSimpleName(), "openDictionaryB" );
+		
+		openDictionary( card.getCardfile().getLanguageB(), card.getSideB() );
+		
+	}
+	
 	/* Dialog events */
 	
 	@Override
@@ -166,5 +196,31 @@ public class ShowCard extends FlascarActivity implements ConfirmDialogListener {
 		returnOK();
 		
 	}
+	
+	/* private */
 
+	private void openWiki( String languageCode, String text ) {
+		
+		String url = "http://" + languageCode + ".wikipedia.org/wiki/" + text.replace( ' ', '_' );
+		Intent intent = new Intent( Intent.ACTION_VIEW ).setData( Uri.parse( url ) );
+		startActivity( intent );
+		
+	}
+	
+	private void openDictionary( String languageCode, String text ) {
+		
+		String dictionary = null;
+		if( languageCode.equals( "es" ) ) dictionary = "rae.es/";
+		else if( languageCode.equals( "en" ) ) dictionary = "dictionary.reference.com/browse/";
+		else {
+			Toast.makeText( getApplicationContext(), "Idioma no soportado: " + languageCode, Toast.LENGTH_SHORT ).show();
+			return;
+		}
+			
+		String url = "http://" + dictionary + text;
+		Intent intent = new Intent( Intent.ACTION_VIEW ).setData( Uri.parse( url ) );
+		startActivity( intent );
+		
+	}
+	
 }

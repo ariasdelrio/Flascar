@@ -1,91 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" 
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
 	android:padding="20px"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
-	
-	<TextView android:id="@+id/review_txtHeader" 
-		xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="18sp"
-    	android:textColor="#FFFFFF"
-    	android:layout_width="fill_parent"
-    	android:layout_height="60sp"/>
-    	
-	<TextView android:id="@+id/review_txtSideA" 
-		xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="20sp"
-    	android:textColor="#FFFFFF"
-    	android:background="#333333"
-    	android:gravity="center"
-    	android:layout_width="fill_parent"
-    	android:layout_height="60sp"/>
 
-	<TextView android:id="@+id/review_txtSideA" 
-		xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="20sp"
-    	android:background="#000000"
-    	android:gravity="center"
-    	android:layout_width="fill_parent"
-    	android:layout_height="10sp"/>
-    		
-	<TextView android:id="@+id/review_txtSideB" 
-		xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="20sp"
-    	android:textColor="#FFFFFF"
-    	android:background="#333333"
-    	android:gravity="center"
-    	android:layout_width="fill_parent"
-    	android:layout_height="60sp"/>
-    	
-    <TextView android:id="@+id/review_txtSideA" 
-		xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:textSize="20sp"
-    	android:background="#000000"
-    	android:gravity="center"
-    	android:layout_width="fill_parent"
-    	android:layout_height="10sp"/>
+	<TextView
+		android:id="@+id/txtHeader"
+		android:textSize="18sp"
+		android:textColor="#FFFFFF"
+		android:paddingBottom="10px"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
 
-	<LinearLayout android:id="@+id/rw_buttons"
-		android:orientation="horizontal" 
+	<ProgressBar
+		android:id="@+id/prbProgress"
+		style="@android:style/Widget.ProgressBar.Horizontal"
+		android:paddingBottom="10px"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+
+	<TextView
+		android:id="@+id/txtSideA"
+		android:textSize="20sp"
+		android:textColor="#FFFFFF"
+		android:background="#333333"
+		android:gravity="center"
+		android:layout_width="fill_parent"
+		android:layout_height="60sp" />
+
+	<TextView
+		android:gravity="center"
+		android:layout_width="fill_parent"
+		android:layout_height="10sp" />
+
+	<TextView
+		android:id="@+id/txtSideB"
+		android:textSize="20sp"
+		android:textColor="#FFFFFF"
+		android:background="#333333"
+		android:gravity="center"
+		android:clickable="true"
+		android:onClick="tap"
+		android:layout_width="fill_parent"
+		android:layout_height="60sp" />
+
+	<LinearLayout
+		android:id="@+id/llRightWrong"
+		android:orientation="horizontal"
 		android:layout_weight="1"
 		android:gravity="bottom"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 
-		<ImageButton android:src="@drawable/right"
-			android:id="@+id/review_btnRight"
+		<ImageButton
+			android:src="@drawable/right_button"
+			android:id="@+id/btnRight"
 			android:background="@null"
-			android:onClick="markRight" 
+			android:onClick="markRight"
 			android:layout_weight="1"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"/>
-    	
-		<ImageButton android:src="@drawable/cancel"
-			android:id="@+id/review_btnWrong"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/cancel_button"
+			android:id="@+id/btnWrong"
 			android:background="@null"
 			android:onClick="markWrong"
-			android:layout_weight="1" 
+			android:layout_weight="1"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"/>
-    	
-    </LinearLayout>
-    
-  	<LinearLayout android:id="@+id/p_button"
-		android:orientation="horizontal" 
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/llPass"
+		android:orientation="horizontal"
 		android:layout_weight="1"
 		android:gravity="bottom"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		
-		<ImageButton android:src="@drawable/delete"
-  			android:id="@+id/review_btnPass"
-  			android:layout_weight="1"
+
+		<ImageButton
+			android:src="@drawable/pass_button"
+			android:id="@+id/btnPass"
+			android:layout_weight="1"
 			android:background="@null"
-			android:onClick="pass" 
+			android:onClick="pass"
 			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"/>
-			
-    </LinearLayout>
-    	
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>
+
 </LinearLayout>

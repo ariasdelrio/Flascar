@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import es.guillesoft.flascar.Core;
 import es.guillesoft.flascar.R;
@@ -24,6 +26,8 @@ public class EditCardfile extends FlascarActivity implements ConfirmDialogListen
 	private EditText txtName;
 	private EditText txtSideA;
 	private EditText txtSideB;
+	private Spinner spnLanguageA;
+	private Spinner spnLanguageB;
 	
 	private int dlgConfirm;
 	
@@ -54,6 +58,15 @@ public class EditCardfile extends FlascarActivity implements ConfirmDialogListen
 
 		}
 		
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource( this, 
+				R.array.languages, android.R.layout.simple_spinner_item );
+	    adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+	    
+		spnLanguageA = (Spinner) findViewById( R.id.spnLanguageA );
+	    spnLanguageA.setAdapter( adapter );
+		spnLanguageB = (Spinner) findViewById( R.id.spnLanguageB );
+	    spnLanguageB.setAdapter( adapter );
+	    
 		txtName = (EditText) findViewById( R.id.edtName );
 		txtSideA = (EditText) findViewById( R.id.edtSideA );
 		txtSideB = (EditText) findViewById( R.id.edtSideB );
@@ -105,11 +118,15 @@ public class EditCardfile extends FlascarActivity implements ConfirmDialogListen
 		String sideA = txtSideA.getText().toString();
 		String sideB = txtSideB.getText().toString();
 		
+		String languageA = getLanguageCode( spnLanguageA );
+		String languageB = getLanguageCode( spnLanguageB );
+		
 		if( cardfile == null ) {
 
 			try {
 			
-				cardfile = Core.getInstance().getDataModel( getContentResolver() ).addCardfile( name, sideA, sideB );
+				cardfile = Core.getInstance().getDataModel( getContentResolver() )
+					.addCardfile( name, sideA, sideB, languageA, languageB );
 				
 			}
 			catch( Exception e ) { 
@@ -124,6 +141,8 @@ public class EditCardfile extends FlascarActivity implements ConfirmDialogListen
 			cardfile.setName( name );
 			cardfile.setSideA( sideA );
 			cardfile.setSideB( sideB );
+			cardfile.setLanguageA( languageA );
+			cardfile.setLanguageB( languageB );
 			cardfile.update();
 			
 		}
@@ -146,6 +165,40 @@ public class EditCardfile extends FlascarActivity implements ConfirmDialogListen
 	public void dlgConfirm( boolean confirm ) {
 		
 		if( confirm ) returnCancel();
+		
+	}
+	
+/* private */
+	
+	private String getLanguageCode( Spinner spnLanguage ) {
+		
+		String languageCode = "es";
+		
+		switch( spnLanguage.getSelectedItemPosition() ) {
+		
+		case 0:
+			
+			languageCode = "es";
+			break;
+				
+		case 1:
+			
+			languageCode = "en";
+			break;
+			
+		case 2:
+			
+			languageCode = "de";
+			break;
+		
+		case 3:
+			
+			languageCode = "ko";
+			break;
+		
+		}
+		
+		return languageCode;
 		
 	}
 	

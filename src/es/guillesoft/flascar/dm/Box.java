@@ -6,7 +6,7 @@ public class Box {
 	
 	private long id;
     private String name;
-    private String expiration;
+    private long expiration; // minutes
 
     public long getID() {
     	return id;
@@ -16,11 +16,13 @@ public class Box {
     	return name;
     }
     
-    public String getExpiration() {
+    public long getExpiration() {
     	return expiration;
     }
     
-    private Box( long id, String name, String expiration ) {
+    /* protected */
+    
+    protected Box( long id, String name, long expiration ) {
     	
     	this.id = id;
     	this.name = name;

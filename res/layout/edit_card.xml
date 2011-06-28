@@ -25,6 +25,8 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 
+	
+
 	<TextView
 		android:id="@+id/txtSideBTitle"
 		style="@style/TitleCyan"
@@ -43,7 +45,6 @@
 		android:id="@+id/edtSideB"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-
 
 	<LinearLayout
 		android:orientation="horizontal"

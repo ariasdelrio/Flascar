@@ -20,11 +20,38 @@
 		android:paddingLeft="5px"
 		android:paddingRight="5px" />
 
-	<TextView
-		android:id="@+id/txtSideA"
-		style="@style/TextWhite"
+	<LinearLayout
+		android:orientation="horizontal"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/txtSideA"
+			style="@style/TextWhite"
+			android:layout_weight="1"
+			android:layout_gravity="left"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/dictionary_button"
+			android:layout_gravity="right"
+			android:background="@null"
+			android:paddingRight="5px"
+			android:onClick="openDictionaryA"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/wiki_button"
+			android:layout_gravity="right"
+			android:background="@null"
+			android:onClick="openWikiA"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>
+
 
 	<TextView
 		android:id="@+id/txtBoxA"
@@ -53,11 +80,38 @@
 		android:paddingLeft="5px"
 		android:paddingRight="5px" />
 
-	<TextView
-		android:id="@+id/txtSideB"
-		style="@style/TextCyan"
+
+	<LinearLayout
+		android:orientation="horizontal"
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" />
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/txtSideB"
+			style="@style/TextCyan"
+			android:layout_weight="1"
+			android:layout_gravity="left"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/dictionary_button"
+			android:layout_gravity="right"
+			android:background="@null"
+			android:onClick="openDictionaryB"
+			android:paddingRight="5px"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+		<ImageButton
+			android:src="@drawable/wiki_button"
+			android:layout_gravity="right"
+			android:background="@null"
+			android:onClick="openWikiB"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+
+	</LinearLayout>
 
 	<TextView
 		android:id="@+id/txtBoxB"
@@ -65,12 +119,12 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 
+
 	<TextView
 		android:id="@+id/txtLastCheckedB"
 		style="@style/TextCyan"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
-
 
 	<LinearLayout
 		android:orientation="horizontal"

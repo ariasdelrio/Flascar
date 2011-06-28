@@ -2,8 +2,7 @@
 <resources>
     
     <string name="app_name">Fláscar</string>
-    <string name="app_version">(beta)</string>
-    <string name="new_cardfile">Nuevo fichero</string>
+    <string name="app_version">1.0</string>
 
 	<string name="cardfile">Fichero</string>
 	<string name="card">Tarjeta</string>
@@ -13,27 +12,24 @@
 	<string name="box">Caja</string>
 	<string name="sense_a">Sentido A</string>
 	<string name="sense_b">Sentido B</string>
+	<string name="language_a">Idioma A</string>
+	<string name="language_b">Idioma B</string>
     <string name="name">Nombre</string>
-	
-	<string name="c_side_a">Cara A</string>
-	<string name="c_side_b">Cara B</string>
-	<string name="c_last_checked_a">Última revisión A</string>
-	<string name="c_last_checked_b">Última revisión B</string>
-    
+	   
     <string name="welcome_none">Fichero no seleccionado</string>
-    <string name="welcome_import">Importar</string>
-    <string name="welcome_export">Exportar</string>
         
     <string name="select_cardfile_none">No se ha encontrado ningún archivo</string>
     <string name="select_cardfile_add">Nuevo</string>
 
     <string name="show_cards_none">No hay tarjetas</string>
-    <string name="show_cards_add">Nueva</string>
     
     <string name="select_file_none">No hay archivos</string>
     
     <string name="dlg_positive">Sí</string>
     <string name="dlg_negative">No</string>
+    
+    <string name="dlg_result_cancelled">¿Terminar revisión?</string>
+    <string name="dlg_result_ended">Revisión finalizada</string>
     
     <string name="dlg_confirm_delete_card">¿Está seguro de que desea eliminar la tarjeta?</string>
     <string name="dlg_confirm_cancel_unsaved">Se perderán los cambios no guardados. ¿Continuar?</string>

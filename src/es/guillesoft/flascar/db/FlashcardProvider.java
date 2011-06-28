@@ -34,7 +34,7 @@ public class FlashcardProvider extends ContentProvider {
 	private static final String DB_NAME = "flascar";
 	private static final String AUTHORITY = "es.guillesoft.flascar.db.FlashcardProvider";
 	private static final String BASE_CT = "vnd.android.cursor.item/vnd.guillesoft.";
-	private static final int DB_VERSION = 28;
+	private static final int DB_VERSION = 3;
 	
 	private static final ViewInfo [] vinfo = new ViewInfo[4];
 	static {
@@ -86,8 +86,8 @@ public class FlashcardProvider extends ContentProvider {
 		}
 		
 		dbHelper = new FlashcardDBHelper( getContext() );
-		dbR = dbHelper.getReadableDatabase();
 		dbRW = dbHelper.getWritableDatabase();
+		dbR = dbHelper.getReadableDatabase();
 
 		return dbR != null && dbRW != null ? true : false;
       

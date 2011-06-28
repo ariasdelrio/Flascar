@@ -17,12 +17,16 @@ public class CardfileView extends View {
 	public static final String NAME          = "name";
 	public static final String SIDE_A        = "side_a";
 	public static final String SIDE_B        = "side_b";
+	public static final String LANGUAGE_A    = "language_a";
+	public static final String LANGUAGE_B    = "language_b";
 	
 	private static final String [] columnsT = {
 		DBUtil.primaryColumn( ID ),
 		DBUtil.textColumn( NAME ),
 		DBUtil.textColumn( SIDE_A ),
 		DBUtil.textColumn( SIDE_B ),
+		DBUtil.textColumn( LANGUAGE_A ),
+		DBUtil.textColumn( LANGUAGE_B )
 	};
 	
 	/* VIEW v_cardfile */
@@ -48,6 +52,8 @@ public class CardfileView extends View {
 		DBUtil.fieldAs(	"cf", NAME, NAME ),
 		DBUtil.fieldAs( "cf", SIDE_A, SIDE_A ),
 		DBUtil.fieldAs( "cf", SIDE_B, SIDE_B ),
+		DBUtil.fieldAs( "cf", LANGUAGE_A, LANGUAGE_A ),
+		DBUtil.fieldAs( "cf", LANGUAGE_B, LANGUAGE_B ),
 		DBUtil.countAs( DBUtil.field( "c", CardView.ID ), CARDS )
 	};
 	
@@ -70,15 +76,6 @@ public class CardfileView extends View {
 	@Override
 	public void upgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
 		Log.d( this.getClass().getSimpleName(), "upgrade " + oldVersion + " -> " + newVersion );
-		
-//		if( oldVersion <= FlashcardProvider.V_1 ) {
-			
-			db.execSQL( DBUtil.dropView( V_CARDFILE ) );
-			db.execSQL( DBUtil.dropTable( T_CARDFILE ) );
-			
-			create( db );
-			
-//		}
 
 	}
 

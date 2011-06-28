@@ -39,14 +39,6 @@ public class MainView extends View {
 	@Override
 	public void upgrade( SQLiteDatabase db, int oldVersion, int newVersion ) {
 		Log.d( this.getClass().getSimpleName(), "upgrade " + oldVersion + " -> " + newVersion );
-		
-//		if( oldVersion <= FlashcardProvider.V_1 ) {
-			
-			db.execSQL( DBUtil.dropTable( T_MAIN ) );
-			create( db );
-			
-//		}
-
 
 	}
      
